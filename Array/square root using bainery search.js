@@ -1,4 +1,4 @@
-function squareRoot(num){
+function squareRootInt(num){
     let start = 0;
     let end = num;
     let mid = parseInt((start + end) / 2);
@@ -18,5 +18,19 @@ function squareRoot(num){
     return ans;
 }
 
-let number = 36;
-console.log(squareRoot(number));
+function morePrecision(num, precision, squareRootInt){
+    let factor = 1;
+    let ans = squareRootInt;
+
+    for(let i=0; i<precision; i++){
+        factor = factor / 10;
+        for(let j = ans; j*j < num; j = j+factor){
+            ans = j;
+        }
+    }
+    return ans.toFixed(precision);
+}
+
+let number = 5001;
+let squareRoot = squareRootInt(number);
+console.log(morePrecision(number, 3, squareRoot));
